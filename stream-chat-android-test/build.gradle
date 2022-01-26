@@ -16,7 +16,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 
 dependencies {
-    api project(":stream-chat-android-core")
+    api "io.getstream:stream-chat-android-core:4.27.0"
 
     implementation Dependencies.androidxLifecycleLiveDataKtx
     api Dependencies.coroutinesTest

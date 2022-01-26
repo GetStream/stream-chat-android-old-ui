@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="stream_ui_user_status_last_seen">"Ultimo accesso %1$s fa"</string>
-  <string name="stream_ui_user_status_last_seen_just_now">"Ultimo accesso di recente"</string>
-  <string name="stream_ui_yesterday">"Ieri"</string>
-</resources>

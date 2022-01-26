@@ -56,7 +56,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 
 dependencies {
-    api project(":stream-chat-android-ui-common")
+    api "io.getstream:stream-chat-android-ui-common:4.27.0"
 
     implementation Dependencies.androidxActivityKtx
     implementation Dependencies.androidxAppCompat

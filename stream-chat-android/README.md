@@ -1,3 +1,5 @@
 # Stream Chat UI
 
-This module contains our old UI implementation. Try the [new UI components](../stream-chat-android-ui-components) and the [new UI components sample app](../stream-chat-android-ui-components-sample) instead!
+This module contains our old UI implementation. It is not maintained anymore. Try the [new UI components](https://github.com/GetStream/stream-chat-android/tree/main/stream-chat-android-ui-components) or our [new compose implementation](https://github.com/GetStream/stream-chat-android/tree/main/stream-chat-android-compose) instead!
+You can find a guide to migrate our Chat UI Components [here](https://github.com/GetStream/stream-chat-android/pull/2467)
+
