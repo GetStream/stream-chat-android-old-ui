@@ -10,25 +10,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.getstream.sdk.chat.view.bindView
-import com.getstream.sdk.chat.viewmodel.ChannelHeaderViewModel
 import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
-import com.getstream.sdk.chat.viewmodel.bindView
-import com.getstream.sdk.chat.viewmodel.factory.ChannelViewModelFactory
 import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
+import io.getstream.chat.android.ui.message.input.viewmodel.bindView
+import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHeaderViewModel
+import io.getstream.chat.android.ui.message.list.header.viewmodel.bindView
+import io.getstream.chat.android.ui.message.list.viewmodel.bindView
+import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
 import io.getstream.chat.sample.databinding.FragmentChannelBinding
 
 class ChannelFragment : Fragment() {
 
     private val cid: String by lazy { navArgs<ChannelFragmentArgs>().value.cid }
-
-    private val viewModelFactory: ChannelViewModelFactory by lazy { ChannelViewModelFactory(cid) }
-
-    private val messagesViewModel: MessageListViewModel by viewModels { viewModelFactory }
-
-    private val channelHeaderViewModel: ChannelHeaderViewModel by viewModels { viewModelFactory }
-
-    private val messageInputViewModel: MessageInputViewModel by viewModels { viewModelFactory }
+    private val factory: MessageListViewModelFactory by lazy { MessageListViewModelFactory(cid) }
+    private val messagesViewModel: MessageListViewModel by viewModels { factory }
+    private val messageListHeaderViewModel: MessageListHeaderViewModel by viewModels { factory }
+    private val messageInputViewModel: MessageInputViewModel by viewModels { factory }
 
     private var _binding: FragmentChannelBinding? = null
     protected val binding get() = _binding!!
@@ -56,7 +53,7 @@ class ChannelFragment : Fragment() {
             messagesViewModel.onEvent(MessageListViewModel.Event.BackButtonPressed)
         }
 
-        binding.channelHeaderView.onBackClick = backButtonHandler
+        binding.messageListHeaderView.setBackButtonClickListener(backButtonHandler)
 
         activity?.apply {
             onBackPressedDispatcher.addCallback(
@@ -79,12 +76,12 @@ class ChannelFragment : Fragment() {
                     is MessageListViewModel.Mode.Normal -> resetThread()
                 }
             }
-            binding.messageListView.setOnMessageEditHandler(::postMessageToEdit)
+            binding.messageListView.setMessageEditHandler(::postMessageToEdit)
         }
     }
 
     private fun initHeaderViewModel() {
-        channelHeaderViewModel.bindView(binding.channelHeaderView, viewLifecycleOwner)
+        messageListHeaderViewModel.bindView(binding.messageListHeaderView, viewLifecycleOwner)
     }
 
     private fun initMessagesViewModel() {
